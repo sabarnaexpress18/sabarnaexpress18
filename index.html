@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SABARNA EXPRESS 18 - Comfort & Safety Travels</title>
+    
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        body { background-color: #f8fafc; color: #1e293b; line-height: 1.6; }
+
+        /* Brand Colors: Deep Blue (#0f2b48), Bright Orange (#ff6600), Pure White (#ffffff) */
+        
+        /* Header & Navigation */
+        header { 
+            background: linear-gradient(135deg, #0f2b48 0%, #1a426e 100%); 
+            color: #ffffff; 
+            padding: 25px 0; 
+            border-bottom: 5px solid #ff6600; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .header-container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 20px;
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: space-between; 
+            align-items: center; 
+            gap: 20px;
+        }
+        .logo-brand-box { 
+            display: flex; 
+            align-items: center; 
+            gap: 18px; 
+        }
+        
+        /* Logo Styling */
+        .logo-img { 
+            width: 80px; 
+            height: 80px; 
+            border-radius: 50%; 
+            border: 3px solid #ff6600; 
+            background: #ffffff;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        .brand-title { 
+            font-size: 2.3em; 
+            font-weight: 800; 
+            color: #ffffff; 
+            letter-spacing: 1px; 
+            line-height: 1.2;
+        }
+        .brand-title span { color: #ff6600; }
+        .tagline { 
+            font-size: 0.95em; 
+            color: #cbd5e1; 
+            font-weight: 500;
+            margin-top: 3px;
+        }
+        .location-badge { 
+            background: rgba(255, 102, 0, 0.15); 
+            border: 1px solid #ff6600;
+            color: #ff9933;
+            padding: 10px 20px; 
+            border-radius: 30px; 
+            font-size: 0.9em; 
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Banner Hero Section */
+        .hero-banner {
+            background: #0f2b48;
+            color: #ffffff;
+            text-align: center;
+            padding: 30px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .hero-banner h1 { font-size: 1.8em; font-weight: 700; color: #ff6600; }
+        .hero-banner p { font-size: 1em; color: #e2e8f0; margin-top: 5px; }
+
+        /* Main Section */
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .section-heading { 
+            text-align: center; 
+            font-size: 2.2em; 
+            font-weight: 800;
+            margin-bottom: 40px; 
+            color: #0f2b48; 
+            position: relative;
+        }
+        .section-heading::after {
+            content: '';
+            width: 90px;
+            height: 4px;
+            background: #ff6600;
+            display: block;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* 5 Services Grid Cards */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 30px; }
+        
+        .card { 
+            background: #ffffff; 
+            border-radius: 16px; 
+            padding: 30px 25px; 
+            box-shadow: 0 10px 25px rgba(15, 43, 72, 0.08); 
+            border: 1px solid #e2e8f0;
+            border-top: 6px solid #ff6600; 
+            transition: all 0.3s ease; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 18px 35px rgba(255, 102, 0, 0.18); }
+        
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 18px; }
+        .icon-box { 
+            width: 60px; 
+            height: 60px; 
+            border-radius: 14px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.7em; 
+        }
+        
+        .card h3 { font-size: 1.35em; color: #0f2b48; font-weight: 700; }
+        
+        .card ul { list-style: none; margin-bottom: 25px; color: #475569; font-size: 0.95em; }
+        .card ul li { margin-bottom: 10px; position: relative; padding-left: 24px; }
+        .card ul li::before { 
+            content: "\f00c"; 
+            font-family: "Font Awesome 6 Free"; 
+            font-weight: 900; 
+            position: absolute; 
+            left: 0; 
+            color: #ff6600; 
+        }
+
+        /* Distinct Color Accents for Services */
+        .card-train .icon-box { background: #e0f2fe; color: #0284c7; }
+        .card-bus .icon-box { background: #dcfce7; color: #16a34a; }
+        .card-flight .icon-box { background: #fef3c7; color: #d97706; }
+        .card-hotel .icon-box { background: #ffedd5; color: #ea580c; }
+        .card-tour .icon-box { background: #f3e8ff; color: #9333ea; }
+
+        /* Action Buttons */
+        .btn-group { display: flex; gap: 12px; }
+        .btn { 
+            flex: 1; 
+            padding: 12px; 
+            text-align: center; 
+            text-decoration: none; 
+            font-weight: 600; 
+            border-radius: 8px; 
+            font-size: 0.92em; 
+            transition: all 0.2s ease; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-wa { background-color: #25D366; color: #ffffff; }
+        .btn-wa:hover { background-color: #1eb954; }
+        .btn-mail { background-color: #0f2b48; color: #ffffff; }
+        .btn-mail:hover { background-color: #ff6600; }
+
+        /* Contact & Helpline Banner */
+        .trust-banner {
+            background: linear-gradient(135deg, #ff6600 0%, #e65c00 100%);
+            color: #ffffff;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            margin-top: 50px;
+            box-shadow: 0 10px 25px rgba(255, 102, 0, 0.25);
+        }
+        .trust-banner h3 { font-size: 1.5em; font-weight: 700; margin-bottom: 5px; }
+
+        /* Footer */
+        footer { 
+            background: #0f2b48; 
+            color: #94a3b8; 
+            padding: 45px 20px 25px; 
+            text-align: center; 
+            margin-top: 60px; 
+            border-top: 5px solid #ff6600;
+        }
+        footer h3 { color: #ffffff; margin-bottom: 10px; font-size: 1.6em; }
+        footer h3 span { color: #ff6600; }
+        footer p { margin-bottom: 10px; font-size: 0.92em; }
+        .social-links { margin: 20px 0; display: flex; justify-content: center; gap: 15px; }
+        .social-links a { 
+            color: #ffffff; 
+            background: rgba(255,255,255,0.1); 
+            width: 42px; 
+            height: 42px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-decoration: none; 
+            transition: 0.3s; 
+        }
+        .social-links a:hover { background: #ff6600; transform: scale(1.1); }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+            <div class="logo-brand-box">
+                <!-- LOGO IMAGE: Replace 'logo.png' with your image file name -->
+                <img src="logo.jpg" alt="Sabarna Express 18 Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/80/0f2b48/ff6600?text=SE18'">
+                <div>
+                    <div class="brand-title">SABARNA <span>EXPRESS 18</span></div>
+                    <div class="tagline">Your Trusted Travel Partner | Comfort & Safety Travels</div>
+                </div>
+            </div>
+            <div class="location-badge">
+                <i class="fa-solid fa-location-dot"></i> Bakshirhat, Subhash Pally, Cooch Behar - 736131
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Announcement -->
+    <div class="hero-banner">
+        <h1>Seamless Travel Booking & Journey Assistance</h1>
+        <p>100% Safe Online Booking | Instant Assistance via WhatsApp & Email</p>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        <h2 class="section-heading">Our Premier Travel Services</h2>
+
+        <div class="services-grid">
+            
+            <!-- 1. Train Service -->
+            <div class="card card-train">
+                <div>
+                    <div class="card-header">
+                        <div class="icon-box"><i class="fa-solid fa-train"></i></div>
+                        <h3>Train Booking Assistance</h3>
+                    </div>
+                    <ul>
+                        <li>All India Train Ticket Reservation Support</li>
+                        <li>Tatkal & Premium Tatkal Booking Assistance</li>
+                        <li>Live Running Status & Platform Guidance</li>
+                        <li>On-Seat Food Delivery Assistance</li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <a href="https://wa.me/916297519303?text=Hi%20Sabarna%20Express%2018,%20I%20want%20to%20inquire%20about%20Train%20Booking." class="btn btn-wa" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                    <a href="mailto:sabarnarik@gmail.com" class="btn btn-mail"><i class="fa-regular fa-envelope"></i> Email</a>
+                </div>
+            </div>
+
+            <!-- 2. Bus Service -->
+            <div class="card card-bus">
+                <div>
+                    <div class="card-header">
+                        <div class="icon-box"><i class="fa-solid fa-bus"></i></div>
+                        <h3>Intercity Bus Tickets</h3>
+                    </div>
+                    <ul>
+                        <li>Direct Bus Operator Booking (No Third-Party Agent)</li>
+                        <li>Routes: Siliguri, Tufanganj, Cooch Behar, Alipurduar, Jaigaon ↔ Kolkata</li>
+                        <li>Partners: Aradhana, Ruby, Raipur Cruiser, Ayush Luxury, Uttorer Sathi, Shyamoli, Green Line, Modern Travels</li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <a href="https://wa.me/916297519303?text=Hi%20Sabarna%20Express%2018,%20I%20want%20to%20book%20a%20Bus%20Ticket." class="btn btn-wa" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                    <a href="mailto:sabarnarik@gmail.com" class="btn btn-mail"><i class="fa-regular fa-envelope"></i> Email</a>
+                </div>
+            </div>
+
+            <!-- 3. Flights -->
+            <div class="card card-flight">
+                <div>
+                    <div class="card-header">
+                        <div class="icon-box"><i class="fa-solid fa-plane"></i></div>
+                        <h3>All India Domestic Flights</h3>
+                    </div>
+                    <ul>
+                        <li>All Domestic Flight Booking Across India</li>
+                        <li>Best Fare Comparison & Flight Route Guidance</li>
+                        <li>Easy Web Check-in & Baggage Assistance</li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <a href="https://wa.me/916297519303?text=Hi%20Sabarna%20Express%2018,%20I%20want%20to%20inquire%20about%20Domestic%20Flights." class="btn btn-wa" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                    <a href="mailto:sabarnarik@gmail.com" class="btn btn-mail"><i class="fa-regular fa-envelope"></i> Email</a>
+                </div>
+            </div>
+
+            <!-- 4. Hotels -->
+            <div class="card card-hotel">
+                <div>
+                    <div class="card-header">
+                        <div class="icon-box"><i class="fa-solid fa-hotel"></i></div>
+                        <h3>Hotel & Homestay Booking</h3>
+                    </div>
+                    <ul>
+                        <li>Verified Budget & Luxury Hotels Across India</li>
+                        <li>Offbeat Hill Station & Tourist Spot Homestays</li>
+                        <li>100% Safe & Guaranteed Stays</li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <a href="https://wa.me/916297519303?text=Hi%20Sabarna%20Express%2018,%20I%20need%20Hotel/Homestay%20Booking." class="btn btn-wa" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                    <a href="mailto:sabarnarik@gmail.com" class="btn btn-mail"><i class="fa-regular fa-envelope"></i> Email</a>
+                </div>
+            </div>
+
+            <!-- 5. Tour Planning -->
+            <div class="card card-tour">
+                <div>
+                    <div class="card-header">
+                        <div class="icon-box"><i class="fa-solid fa-map-location-dot"></i></div>
+                        <h3>Smart Tour Planning</h3>
+                    </div>
+                    <ul>
+                        <li>Customized & Pocket-Friendly Tour Packages</li>
+                        <li>Complete Sightseeing Itinerary & Travel Advice</li>
+                        <li>Family & Friends Group Vacation Support</li>
+                    </ul>
+                </div>
+                <div class="btn-group">
+                    <a href="https://wa.me/916297519303?text=Hi%20Sabarna%20Express%2018,%20I%20need%20a%20Tour%20Plan." class="btn btn-wa" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                    <a href="mailto:sabarnarik@gmail.com" class="btn btn-mail"><i class="fa-regular fa-envelope"></i> Email</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Trust Helpline Banner -->
+        <div class="trust-banner">
+            <h3>Need Quick Travel Consultation?</h3>
+            <p>Call or WhatsApp us directly at <strong>+91 6297519303</strong> for instant guidance and ticket availability!</p>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <h3>SABARNA <span>EXPRESS 18</span></h3>
+        <p>Bakshirhat, Subhash Pally, Cooch Behar, West Bengal - PIN 736131</p>
+        <p><i class="fa-solid fa-phone"></i> Helpline: +91 6297519303 | <i class="fa-solid fa-envelope"></i> Email: sabarnarik@gmail.com</p>
+        
+        <div class="social-links">
+            <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://instagram.com/train_lover_sabarna" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://youtube.com" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        
+        <p style="font-size: 0.8em; opacity: 0.7;">© 2026 Sabarna Express 18. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
