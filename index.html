@@ -144,36 +144,198 @@
                 <li><strong>রেলওয়ে সুরক্ষা বাহিনী (RPF):</strong> ১৩৯</li>
             </ul>
             <p>📍 <strong>আমাদের অফিস লোকেশন:</strong> বক্সিরহাট, সুভাষ পল্লী, কোচবিহার - ৭৩৬১৩১। (আমাদের অফিসের আশেপাশে ভালো খাবার ও হোটেলের সুযোগ-সুবিধা পেতে গুগল ম্যাপস ব্যবহার করুন)।</p>
-  <!-- কাস্টমার রিভিউ ও ফিডব্যাক ফর্ম -->
-        <div class="section-box">
-            <h2>✍️ আপনার অভিজ্ঞতা জানান (Customer Review & Feedback)</h2>
-            <p>আমাদের পরিষেবা কেমন লাগল নিচে আপনার নাম ও কমেন্ট লিখে সাবমিট করুন:</p>
-            <form onsubmit="event.preventDefault(); alert('ধন্যবাদ! আপনার রিভিউটি সফলভাবে জমা হয়েছে।');" style="display: flex; flex-direction: column; gap: 15px; max-width: 600px;">
-                <input type="text" placeholder="আপনার নাম (Your Name)" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
-                <select style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
-                    <option value="5">⭐⭐⭐⭐⭐ (৫ স্টার - দুর্দান্ত)</option>
-                    <option value="4">⭐⭐⭐⭐ (৪ স্টার - ভালো)</option>
-                    <option value="3">⭐⭐⭐ (৩ স্টার - মাঝারি)</option>
-                    <option value="2">⭐⭐ (২ স্টার - উন্নতির প্রয়োজন)</option>
-                    <option value="1">⭐ (১ স্টার - খারাপ)</option>
-                </select>
-                <textarea placeholder="আপনার মূল্যবান মন্তব্য লিখুন..." rows="4" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;"></textarea>
-                <button type="submit" style="background-color: var(--blue); color: white; padding: 10px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">রিভিউ সাবমিট করুন</button>
-            </form>
+  <!-- কাস্টমার রিভিউ ও ফিডব্যাক ফর্ম (অ্যানিমেটেড স্টার রেটিং এবং হোয়াটসঅ্যাপ ইন্টিগ্রেশনসহ) -->
+<div class="section-box">
+    <h2>✍️ আপনার অভিজ্ঞতা জানান (Customer Review & Feedback)</h2>
+    <p>আমাদের পরিষেবা কেমন লাগল নিচে আপনার নাম, স্টার রেটিং ও কমেন্ট লিখে সাবমিট করুন!</p>
+    
+    <form onsubmit="sendReviewToWhatsApp(event)" style="display: flex; flex-direction: column; gap: 15px; max-width: 600px;">
+        <input type="text" id="reviewer-name" placeholder="আপনার নাম (Your Name)" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        
+        <!-- অ্যানিমেটেড ও ইন্টারঅ্যাক্টিভ স্টার রেটিং সিলেকশন -->
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+            <label style="font-weight: bold; font-size: 14px; color: #444;">আপনার রেটিং বেছে নিন:</label>
+            <div id="star-rating-container" style="display: flex; gap: 8px; font-size: 30px; cursor: pointer;">
+                <span class="star-btn" data-value="1" style="transition: transform 0.2s;">⭐</span>
+                <span class="star-btn" data-value="2" style="transition: transform 0.2s;">⭐</span>
+                <span class="star-btn" data-value="3" style="transition: transform 0.2s;">⭐</span>
+                <span class="star-btn" data-value="4" style="transition: transform 0.2s;">⭐</span>
+                <span class="star-btn" data-value="5" style="transition: transform 0.2s;">⭐</span>
+            </div>
+            <!-- লুকানো ইনপুট যা হোয়াটসঅ্যাপে ডেটা পাঠাতে সাহায্য করবে -->
+            <input type="hidden" id="selected-rating-value" value="5 স্টার - দুর্দান্ত">
+            <span id="rating-text" style="font-weight: bold; color: #FF9933; font-size: 14px;">⭐⭐⭐⭐⭐ (৫ স্টার - দুর্দান্ত)</span>
         </div>
+        
+        <textarea id="reviewer-comment" placeholder="আপনার মূল্যবান মন্তব্য লিখুন..." rows="4" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-weight: bold;"></textarea>
+        
+        <button type="submit" style="background-color: var(--blue); color: white; padding: 10px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">হোয়াটসঅ্যাপে রিভিউ পাঠান</button>
+    </form>
+</div>
+     <!-- স্টার অ্যানিমেশন ও হোয়াটসঅ্যাপ সেন্ডিং এর জন্য জাভাস্ক্রিপ্ট -->
+<script>
+const stars = document.querySelectorAll('.star-btn');
+const ratingInput = document.getElementById('selected-rating-value');
+const ratingText = document.getElementById('rating-text');
 
-        <!-- ইমোজি স্যাটিসফ্যাকশন মিটার -->
-        <div class="section-box" style="text-align: center;">
-            <h2>⭐ স্যাটিসফ্যাকশন মিটার (Customer Satisfaction Meter)</h2>
-            <p style="font-size: 2rem; margin: 10px 0;">
-                🤩 😍 😊 😐 😡
-            </p>
-            <p>আপনার হাসিমুখ এবং সন্তুষ্টিই আমাদের প্রধান লক্ষ্য!</p>
-        </div>
+const ratingDescriptions = {
+    1: "⭐ (১ স্টার - খারাপ)",
+    2: "⭐⭐ (২ স্টার - উন্নতির প্রয়োজন)",
+    3: "⭐⭐⭐ (৩ স্টার - মাঝারি)",
+    4: "⭐⭐⭐⭐ (৪ স্টার - ভালো)",
+    5: "⭐⭐⭐⭐⭐ (৫ স্টার - দুর্দান্ত)"
+};
 
+// ডিফল্টভাবে ৫টি স্টার সিলেক্ট করা থাকবে
+highlightStars(5);
+
+stars.forEach((star) => {
+    star.addEventListener('click', function() {
+        const value = parseInt(this.getAttribute('data-value'));
+        
+        // বাউন্স অ্যানিমেশন ট্রিগার করা
+        stars.forEach(s => s.classList.remove('bounce'));
+        this.classList.add('bounce');
+        
+        // সাউন্ড বাজানো (স্যাটিসফ্যাকশন মিটারের মতো মিষ্টি টোন)
+        playStarTone(value);
+        
+        // স্টার হাইলাইট আপডেট করা
+        highlightStars(value);
+        
+        // ভ্যালু সেট করা
+        ratingInput.value = ratingDescriptions[value];
+        ratingText.textContent = ratingDescriptions[value];
+    });
+});
+
+function highlightStars(count) {
+    stars.forEach((star, index) => {
+        if (index < count) {
+            star.style.opacity = "1";
+            star.style.filter = "drop-shadow(0 0 2px gold)";
+        } else {
+            star.style.opacity = "0.3";
+            star.style.filter = "none";
+        }
+    });
+}
+
+function playStarTone(type) {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    let freq = 400 + (type * 80);
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+    gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.25);
+}
+
+function sendReviewToWhatsApp(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('reviewer-name').value;
+    const rating = ratingInput.value;
+    const comment = document.getElementById('reviewer-comment').value;
+    
+    // আপনার সঠিক হোয়াটসঅ্যাপ নম্বর (6297519303)
+    const myWhatsAppNumber = "916297519303";
+    
+    const message = `নতুন কাস্টমার রিভিউ:\n\n👤 নাম: ${name}\n⭐ রেটিং: ${rating}\n💬 মন্তব্য: ${comment}`;
+    
+    const url = `https://wa.me/${myWhatsAppNumber}?text=${encodeURIComponent(message)}`;
+    
+    window.open(url, '_blank');
+}
+</script> 
+   <!-- ইমোজি স্যাটিসফ্যাকশন মিটার (অ্যানিমেশন ও সাউন্ডসহ) -->
+<div class="section-box" style="text-align: center;">
+    <h2>⭐ স্যাটিসফ্যাকশন মিটার (Customer Satisfaction Meter)</h2>
+    <div id="satisfaction-meter" style="display: flex; justify-content: center; gap: 20px; font-size: 35px; cursor: pointer; margin: 15px 0;">
+        <span class="emoji-btn" data-score="1" title="খুব খারাপ" style="transition: transform 0.2s;">😡</span>
+        <span class="emoji-btn" data-score="2" title="খারাপ" style="transition: transform 0.2s;">🙁</span>
+        <span class="emoji-btn" data-score="3" title="মাঝারি" style="transition: transform 0.2s;">😐</span>
+        <span class="emoji-btn" data-score="4" title="ভালো" style="transition: transform 0.2s;">😊</span>
+        <span class="emoji-btn" data-score="5" title="খুব ভালো / অসাধারণ" style="transition: transform 0.2s;">😍</span>
     </div>
+    <p style="font-size: 16px; margin: 10px 0; color: #555;">আপনার হাসিমুখ এবং সন্তুষ্টিই আমাদের প্রধান লক্ষ্য!</p>
+    <p id="feedback-result" style="font-weight: bold; color: #FF9933; min-height: 24px;"></p>
+</div>
+  <!-- CSS Animation Styling -->
+<style>
+@keyframes bounceJump {
+    0% { transform: scale(1) translateY(0); }
+    30% { transform: scale(1.4) translateY(-15px); }
+    50% { transform: scale(1.3) translateY(0); }
+    70% { transform: scale(1.4) translateY(-8px); }
+    100% { transform: scale(1.2) translateY(0); }
+}
+.bounce {
+    animation: bounceJump 0.5s ease;
+}
+</style>
 
-    <!-- ফুটার ও ধন্যবাদ জ্ঞাপন -->
+<!-- JavaScript for Emoji Sound & Animation -->
+<script>
+const emojis = document.querySelectorAll('.emoji-btn');
+const resultText = document.getElementById('feedback-result');
+
+function playTone(type) {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    let freq = 400;
+    if(type === 1) freq = 200;  
+    if(type === 2) freq = 300;
+    if(type === 3) freq = 450;
+    if(type === 4) freq = 600;
+    if(type === 5) freq = 800;  
+
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    if(type === 5) {
+        osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+        osc.frequency.setValueAtTime(1050, audioCtx.currentTime + 0.1);
+    }
+
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.3);
+}
+
+emojis.forEach((emoji) => {
+    emoji.addEventListener('click', function() {
+        emojis.forEach(e => e.classList.remove('bounce'));
+        this.classList.add('bounce');
+
+        const score = parseInt(this.getAttribute('data-score'));
+        playTone(score);
+
+        const messages = {
+            1: "আপনার মতামত আমাদের জানানোর জন্য ধন্যবাদ। আমরা আরও উন্নতির চেষ্টা করব।",
+            2: "ধন্যবাদ! আপনার অভিজ্ঞতা আরও ভালো করার চেষ্টা করব।",
+            3: "ধন্যবাদ আপনার মূল্যবান মতামতের জন্য!",
+            4: "অনেক ধন্যবাদ! আপনার দিনটি আনন্দময় হোক!",
+            5: "অসংখ্য ধন্যবাদ! আপনার হাসিমুখই আমাদের সবচেয়ে বড় প্রাপ্তি! ❤️"
+        };
+        resultText.textContent = messages[score];
+    });
+});
+</script>          
+ <!-- ফুটার ও ধন্যবাদ জ্ঞাপন -->
     <footer style="background: var(--blue); color: var(--white); text-align: center; padding: 40px 20px; border-top: 5px solid var(--saffron);">
         <p style="font-size: 1.5rem; margin: 0 0 10px 0;">🙏</p>
         <p style="font-size: 1.25rem; font-weight: bold; color: var(--saffron);">হাত জোড় করে আমাদের তরফ থেকে আপনাকে জানাই অশেষ ধন্যবাদ!</p>
